@@ -8,7 +8,7 @@ class Filme(models.Model):
 
     title = models.CharField(max_length=255)
     description = models.TextField()
-    lancamento = models.CharField(max_length=255)
+    lancamento = models.DateField()
     foto = models.TextField()
     cartaz = models.TextField()
     tipo = models.CharField(
