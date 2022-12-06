@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Cinema CinemaSauro{% endblock %}
+
+{% block content %}
+<div class="offset-1 col-10 list-div">
+    <div class="cine-cartaz">
+        <h1>Cardápio</h1>
+        {% for lanche in lanches %}
+        <div class="card" style="width: 10rem;">
+            <img src="{{lanche.foto}}" class="card-img-top" alt="...">
+            <span><a href="/lanche/{{lanche.id}}">{{lanche.title}}</a></span>
+        </div>
+        {% endfor %}
+    </div>    
+</div>
+{% endblock %}
