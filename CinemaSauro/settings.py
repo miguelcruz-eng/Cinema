@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 
+import rest_framework
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,16 +39,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'rest_framework'
-    'corsheaders'
+    'rest_framework',
+    'corsheaders',
     'cinema',
-    'lanches',
 ]
 
 CORS_ORIGIN_ALLOW_ALL=True
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware'
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -83,9 +84,9 @@ WSGI_APPLICATION = 'CinemaSauro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'main_tables',
+        'NAME': 'cinema',
         'USER':'root',
-        'PASSWORD':'',
+        'PASSWORD':'Mcruz99-',
         'HOST':'localhost',
         'PORT':'3306',
         #comentarip

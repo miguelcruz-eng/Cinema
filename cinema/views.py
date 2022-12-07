@@ -21,12 +21,12 @@ def filmView(request, id):
     return render(request, 'cinema/filme.html', {'filme': filme})
 
 
-from .models import Lanche
+from .models import Lanches
 
 def lunchList(request):
-    lanches = Lanche.objects.all()
+    lanches = Lanches.objects.all()
     return render(request, 'lanches/list.html', {'lanches': lanches})
 
 def lunchView(request, id):
-    lanche = get_object_or_404(Lanche, pk=id)
+    lanche = get_object_or_404(Lanches, pk=id)
     return render(request, 'lanches/lanche.html', {'lanche': lanche})
