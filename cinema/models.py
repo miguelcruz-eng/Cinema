@@ -56,8 +56,8 @@ class Cliente(models.Model):
 
 class Comprar(models.Model):
     i_ingresso_comprar = models.OneToOneField('Ingressos', models.DO_NOTHING, db_column='i_ingresso_comprar', primary_key=True)
-    i_lanches_comprar = models.ForeignKey('Lanches', models.DO_NOTHING, unique=True, related_name='i_lanches_comprar')
-    i_estreia_comprar = models.ForeignKey('Estreias', models.DO_NOTHING, unique=True, related_name='i_estreia_comprar')
+    i_lanches_comprar = models.ForeignKey('Lanches', models.DO_NOTHING, unique=True, db_column='i_lanches_comprar')
+    i_estreia_comprar = models.ForeignKey('Estreias', models.DO_NOTHING, unique=True, db_column='i_estreia_comprar')
     i_bilhe_field = models.ForeignKey('Bilheteria', models.DO_NOTHING, unique=True, db_column='i_bilhe_field')  # Field renamed because it ended with '_'.
 
     class Meta:
@@ -97,7 +97,7 @@ class Filme(models.Model):
 class Ingressos(models.Model):
     i_cod_ingresso = models.IntegerField(primary_key=True)
     f_preco_ingresso = models.IntegerField()
-    secoes_i_cod_secoes = models.ForeignKey('Secoes', models.DO_NOTHING, related_name='secoes_i_cod_secoes')
+    secoes_i_cod_secoes = models.ForeignKey('Secoes', models.DO_NOTHING, db_column='secoes_i_cod_secoes')
     i_id_estreia = models.IntegerField()
 
     class Meta:
@@ -117,7 +117,7 @@ class Lanches(models.Model):
 
 
 class Ofertas(models.Model):
-    i_id_ofertas = models.IntegerField()
+    i_id_ofertas = models.IntegerField(primary_key=True)
     ofertas = models.CharField(max_length=45)
 
     class Meta:
@@ -140,8 +140,8 @@ class Secoes(models.Model):
     i_cod_secoes = models.IntegerField(primary_key=True)
     d_data_secoes = models.DateField()
     h_hora_secoes = models.DateTimeField()
-    i_tiposala_secoes = models.ForeignKey(Sala, models.DO_NOTHING, related_name='i_TipoSala_secoes')  # Field name made lowercase.
-    filme_i_id_filme = models.ForeignKey(Filme, models.DO_NOTHING, related_name='filme_i_id_filme')
+    i_tiposala_secoes = models.ForeignKey(Sala, models.DO_NOTHING, db_column='i_TipoSala_secoes')  # Field name made lowercase.
+    filme_i_id_filme = models.ForeignKey(Filme, models.DO_NOTHING, db_column='filme_i_id_filme')
 
     class Meta:
         managed = False

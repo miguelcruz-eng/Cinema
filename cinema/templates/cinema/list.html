@@ -41,10 +41,13 @@
     <div class="cine-cartaz">
         <h1>Filmes em Cartaz</h1>
         {% for filme in filmes %}
-        <div class="card" style="width: 10rem;">
-            <img src="{{filme.foto}}" class="card-img-top" alt="...">
-            <span><a href="/filme/{{filme.id}}">{{filme.title}}</a></span>
-        </div>
+        <ul class="film-list">
+            <li class="film-item">
+                <span><a href="/filme/{{filme.i_id_filme}}">{{filme.s_titulo_filme}}</a></span>
+                <i class="fas fa-right-to-bracket"></i>
+            </li>
+        </ul>
+        
         {% endfor %}
     </div>    
 </div>

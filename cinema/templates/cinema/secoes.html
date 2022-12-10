@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}Cinema CinemaSauro{% endblock %}
+
+{% block content %}
+<div class="secoes-cartaz">
+    <h1>Escolha o horario da secção</h1>
+    {% for secao in secoes %}
+    <ul class="secao-list">
+        <li class="secao-item">
+            <span><a href="/secoes/{{secao.i_cod_secoes}}">{{secao.h_hora_secoes}}{{d_data_secoes}}</a></span>
+            <i class="fas fa-right-to-bracket"></i>
+        </li>
+    </ul> 
+    {% endfor %}
+</div>    
+{% endblock %}

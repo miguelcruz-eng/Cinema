@@ -3,16 +3,16 @@
 {% block title %}Cinema CinemaSauro{% endblock %}
 
 {% block content %}
+
 <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
-      <div class="col-md-4">
-        <img src="{{filme.foto}}" class="img-fluid rounded-start" alt="...">
-      </div>
       <div class="col-md-8">
-        <div class="card-body">
-          <h5 class="card-title">{{filme.title}}</h5>
-          <p class="card-text">{{filme.description}}</p>
+                <div class="card-body">
+          <h5 class="card-title">{{filme.s_titulo_filme}}</h5>
+          <p class="card-text">{{secao.h_hora_secoes}}</p>
+          <a href="/secoes/{{filme.i_id_filme}}" class="btn btn-primary">Comprar ingresso</a>
         </div>
+        
       </div>
     </div>
   </div>
