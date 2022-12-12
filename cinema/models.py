@@ -134,6 +134,8 @@ class Sala(models.Model):
     class Meta:
         managed = False
         db_table = 'sala'
+    def __int__(self):
+        return self.i_numero_sala
 
 
 class Secoes(models.Model):
