@@ -8,7 +8,7 @@ from .models import Secoes
 from .models import Filme
 
 def filmList(request):
-    filmes = Secoes.objects.filter()   
+    filmes = Filme.objects.filter()   
 
     #paginator = Paginator(filmes_list, 5)
 
