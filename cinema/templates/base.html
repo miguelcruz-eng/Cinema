@@ -33,7 +33,7 @@
                         <a class="nav-link" href="#">Carrinho</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pacotes</a>
+                        <a class="nav-link" href="cliente/">Cliente</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sobre nós</a>
@@ -46,8 +46,10 @@
         <footer>
             <p>Procurar filmes</p>
             <div class="col-5 search-div">
-                <input class="form-control" type="text" id="search" placeholder="Digite o Filme que deseja pesquisar">
-                <i class="fas fa-search"></i>
+                <form method="GET" id="search-form">
+                    <input class="form-control" type="text" id="search" name="search" placeholder="Digite o Filme que deseja pesquisar" value="{{ request.GET.search }}">
+                    <i class="fas fa-search" id="search_btn" style="cursor: pointer;"></i>
+                </form>
             </div>
             <div class="col-5 dados-div">
                 <p>Dados para contato</p>

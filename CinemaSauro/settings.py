@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'cinema',
+    'crispy_forms',
 ]
 
 CORS_ORIGIN_ALLOW_ALL=True
@@ -84,9 +85,9 @@ WSGI_APPLICATION = 'CinemaSauro.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'cinema',
+        'NAME': 'cinema2',
         'USER':'root',
-        'PASSWORD':'Mcruz99-',
+        'PASSWORD':'1234',
         'HOST':'localhost',
         'PORT':'3306',
         #comentarip
@@ -134,3 +135,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'

@@ -71,13 +71,6 @@ footer p {
     position: relative;
 }
 
-.fas.fa-search {
-    
-    position: absolute;
-    top: 12px;
-    right: 26px;
-}
-
 .search-div {
     position: relative;
     padding: 0px;

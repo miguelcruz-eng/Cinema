@@ -5,6 +5,14 @@
 #   * Make sure each ForeignKey and OneToOneField has `on_delete` set to the desired behavior
 #   * Remove `managed = False` lines if you wish to allow Django to create, modify, and delete the table
 # Feel free to rename the models, but don't rename db_table values or field names.
+from enum import unique
+from django.db import models
+from django.conf import settings
+from django.utils import timezone
+from django.core.mail import send_mail
+from django.core.validators import RegexValidator
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.db import models
 
 
@@ -16,15 +24,18 @@ class Atores(models.Model):
         managed = False
         db_table = 'atores'
 
+    def __str__(self):
+        return self.s_nome_ator
+
 
 class Bilheteria(models.Model):
     formapagamento = models.IntegerField(db_column='FormaPagamento')  # Field name made lowercase.
-    cliente_id_bilhe = models.OneToOneField('Cliente', models.DO_NOTHING, db_column='cliente_id_bilhe', primary_key=True)
+    cliente_id_bilhe = models.OneToOneField('Cliente', models.DO_NOTHING, related_name='cliente_id_bilhe', primary_key=True)
     mostra_ofertas = models.IntegerField()
-    comprar_i_ingresso_comprar = models.ForeignKey('Comprar', models.DO_NOTHING, db_column='comprar_i_ingresso_comprar')
-    comprar_i_lanches_comprar = models.ForeignKey('Comprar', models.DO_NOTHING, db_column='comprar_i_lanches_comprar', to_field='i_lanches_comprar')
-    comprar_i_estreia_comprar = models.ForeignKey('Comprar', models.DO_NOTHING, db_column='comprar_i_estreia_comprar', to_field='i_estreia_comprar')
-    comprar_i_bilhe_field = models.ForeignKey('Comprar', models.DO_NOTHING, db_column='comprar_i_bilhe_', to_field='i_bilhe_')  # Field renamed because it ended with '_'.
+    comprar_i_ingresso_comprar = models.ForeignKey('Comprar', models.DO_NOTHING, related_name='comprar_i_ingresso_comprar')
+    comprar_i_lanches_comprar = models.ForeignKey('Comprar', models.DO_NOTHING, related_name='comprar_i_lanches_comprar', to_field='i_lanches_comprar')
+    comprar_i_estreia_comprar = models.ForeignKey('Comprar', models.DO_NOTHING, related_name='comprar_i_estreia_comprar', to_field='i_estreia_comprar')
+    comprar_i_bilhe_field = models.ForeignKey('Comprar', models.DO_NOTHING, related_name='comprar_i_bilhe_field', to_field='i_bilhe_field')  # Field renamed because it ended with '_'.
 
     class Meta:
         managed = False
@@ -45,9 +56,9 @@ class Cliente(models.Model):
 
 class Comprar(models.Model):
     i_ingresso_comprar = models.OneToOneField('Ingressos', models.DO_NOTHING, db_column='i_ingresso_comprar', primary_key=True)
-    i_lanches_comprar = models.ForeignKey('Lanches', models.DO_NOTHING, db_column='i_lanches_comprar')
-    i_estreia_comprar = models.ForeignKey('Estreias', models.DO_NOTHING, db_column='i_estreia_comprar')
-    i_bilhe_field = models.IntegerField(db_column='i_bilhe_')  # Field renamed because it ended with '_'.
+    i_lanches_comprar = models.ForeignKey('Lanches', models.DO_NOTHING, unique=True, db_column='i_lanches_comprar')
+    i_estreia_comprar = models.ForeignKey('Estreias', models.DO_NOTHING, unique=True, db_column='i_estreia_comprar')
+    i_bilhe_field = models.ForeignKey('Bilheteria', models.DO_NOTHING, unique=True, db_column='i_bilhe_field')  # Field renamed because it ended with '_'.
 
     class Meta:
         managed = False
@@ -78,6 +89,9 @@ class Filme(models.Model):
         managed = False
         db_table = 'filme'
         unique_together = (('i_id_filme', 'i_id_atores'),)
+    
+    def __str__(self):
+        return self.s_titulo_filme
 
 
 class Ingressos(models.Model):
@@ -93,6 +107,7 @@ class Ingressos(models.Model):
 
 class Lanches(models.Model):
     i_cod_lanche = models.IntegerField(primary_key=True)
+    #s_nome_lanche = models.CharField(max_length=30)
     f_preco_lanche = models.FloatField()
     i_quantidade_lanche = models.IntegerField()
     i_tipo_lanche = models.IntegerField()
@@ -103,7 +118,7 @@ class Lanches(models.Model):
 
 
 class Ofertas(models.Model):
-    i_id_ofertas = models.IntegerField()
+    i_id_ofertas = models.IntegerField(primary_key=True)
     ofertas = models.CharField(max_length=45)
 
     class Meta:
@@ -120,6 +135,8 @@ class Sala(models.Model):
     class Meta:
         managed = False
         db_table = 'sala'
+    def __int__(self):
+        return self.i_numero_sala
 
 
 class Secoes(models.Model):
@@ -143,6 +160,9 @@ class Tipocliente(models.Model):
         managed = False
         db_table = 'tipocliente'
 
+    def __str__(self):
+        return self.s_desc_tcliente
+
 
 class Tipofilme(models.Model):
     i_idcategoria_tipofilme = models.IntegerField(db_column='i_idCategoria_TipoFilme', primary_key=True)  # Field name made lowercase.
@@ -151,3 +171,6 @@ class Tipofilme(models.Model):
     class Meta:
         managed = False
         db_table = 'tipofilme'
+    
+    def __str__(self):
+        return self.s_genero_tipofilme
