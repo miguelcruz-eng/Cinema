@@ -8,13 +8,17 @@ from django.utils import timezone
 from .models import Secoes
 from .models import Filme
 from .models import Clientes
+from .models import Produtos
+from .models import Ingressos
 from .forms import ClientForm
+from .forms import IngressoForm
+
 
 def filmList(request):
     search = request.GET.get('search')
 
     if search:
-        filmes = Filme.objects.filter(s_titulo_filme__icontains = search)
+        filmes = Filme.objects.filter(titulo__icontains = search)
 
     else:
         filmes = Filme.objects.all()
@@ -33,7 +37,7 @@ def filmView(request, id):
     return render(request, 'cinema/filme.html', {'filme': filme})
 
 def secoesFilm(request,id):
-    secoes = Secoes.objects.filter(filme_i_id_filme = id,d_data_secoes = timezone.now().date())
+    secoes = Secoes.objects.filter(filme_id_secoes = id)#, hora_inicio = timezone.now().date())
     
     return render(request, 'cinema/secoes.html', {'secoes': secoes})
 
@@ -54,7 +58,30 @@ def novoCliente(request):
         form = ClientForm()
     return render(request, 'cliente/cliente.html',{'form':form})
 
-from .models import Produtos
+def ingressoView(request, id):
+    ingresso = get_object_or_404(Ingressos, pk=id)
+    return render(request, 'user/ingresso.html', {'ingresso',ingresso})
+
+def novoIngresso(request, id):
+    if request.method == 'POST':
+        form = IngressoForm(request.POST)
+
+        if form.is_valid():
+            ingresso = form.save(commit=False)
+            if ingresso.tipo_tingresso == 1:
+                ingresso.preco_ingresso = 15
+            if ingresso.tipo_tingresso == 2:
+                ingresso.preco_ingresso = 30
+            if ingresso.tipo_tingresso == 3:
+                ingresso.preco_ingresso = 15
+            if ingresso.tipo_tingresso == 4:
+                ingresso.preco_ingresso = 0
+            ingresso.save()
+            return redirect('/')
+
+    else:
+        form = IngressoForm()
+    return render(request, 'cliente/ingresso.html',{'form':form})
 
 def lunchList(request):
     lanches = Produtos.objects.all()

@@ -8,9 +8,14 @@
     <div class="row g-0">
       <div class="col-md-8">
                 <div class="card-body">
-          <h5 class="card-title">{{filme.s_titulo_filme}}</h5>
-          <p class="card-text">{{secao.h_hora_secoes}}</p>
-          <a href="/secoes/{{filme.i_id_filme}}" class="btn btn-primary">Comprar ingresso</a>
+          <h5 class="card-title">{{filme.titulo}}</h5>
+          <p class="card-text">
+            Duração: {{filme.duracao}}  <br>
+            Lançamento: {{filme.data_lancamento}}  <br>
+            Direção: {{filme.diretor}}  <br>
+            Genero: {{filme.genero_filme}}
+          </p>
+          <a href="/secoes/{{filme.id}}" class="btn btn-primary">Comprar ingresso</a>
         </div>
         
       </div>

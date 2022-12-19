@@ -7,6 +7,7 @@ urlpatterns = [
     path('filme/<int:id>', views.filmView, name="film-view"),
     path('secoes/<int:id>', views.secoesFilm, name='secoes-list'),
     path('cliente/', views.novoCliente, name='new-client'),
+    path('ingresso/<int:id>', views.novoIngresso, name='new-ingresso'),
     path('lanches/', views.lunchList, name='lunch-list'),
     path('lanche/<int:id>', views.lunchView, name="lunch-view"),
 ]
