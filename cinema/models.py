@@ -140,6 +140,9 @@ class Salas(models.Model):
     class Meta:
         managed = False
         db_table = 'salas'
+    
+    def __str__(self):
+        return self.name
 
 
 class Secoes(models.Model):

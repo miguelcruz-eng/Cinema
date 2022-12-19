@@ -10,6 +10,7 @@ from .models import Filme
 from .models import Clientes
 from .models import Produtos
 from .models import Ingressos
+from .models import OfertasCinema
 from .forms import ClientForm
 from .forms import IngressoForm
 
@@ -37,9 +38,12 @@ def filmView(request, id):
     return render(request, 'cinema/filme.html', {'filme': filme})
 
 def secoesFilm(request,id):
-    secoes = Secoes.objects.filter(filme_id_secoes = id)#, hora_inicio = timezone.now().date())
-    
+    secoes = Secoes.objects.filter(filme_id_secoes = id)#, hora_inicio = timezone.now().date())   
     return render(request, 'cinema/secoes.html', {'secoes': secoes})
+
+def clientList(request):
+    clientes = Clientes.objects.all()
+    return render(request, 'cliente/cliente-list.html', {'clientes': clientes})
 
 def clientView(request, id):
     cliente = get_object_or_404(Clientes, pk=id)
@@ -62,20 +66,22 @@ def ingressoView(request, id):
     ingresso = get_object_or_404(Ingressos, pk=id)
     return render(request, 'user/ingresso.html', {'ingresso',ingresso})
 
-def novoIngresso(request, id):
+def novoIngresso(request):
     if request.method == 'POST':
         form = IngressoForm(request.POST)
 
         if form.is_valid():
             ingresso = form.save(commit=False)
-            if ingresso.tipo_tingresso == 1:
+            if ingresso.tipo_tingresso == 'Criança':
                 ingresso.preco_ingresso = 15
-            if ingresso.tipo_tingresso == 2:
+            if ingresso.tipo_tingresso == 'Adulto':
                 ingresso.preco_ingresso = 30
-            if ingresso.tipo_tingresso == 3:
+            if ingresso.tipo_tingresso == 'Idoso':
                 ingresso.preco_ingresso = 15
-            if ingresso.tipo_tingresso == 4:
+            if ingresso.tipo_tingresso == 'Flamenguista':
                 ingresso.preco_ingresso = 0
+            else:
+                ingresso.preco_ingresso = 30
             ingresso.save()
             return redirect('/')
 
@@ -90,3 +96,7 @@ def lunchList(request):
 def lunchView(request, id):
     lanche = get_object_or_404(Produtos, pk=id)
     return render(request, 'lanches/lanche.html', {'lanche': lanche})
+
+def promoList(request):
+    promos = OfertasCinema.objects.all()
+    return render(request, 'cliente/promocoes.html', {'promos': promos})

@@ -5,13 +5,10 @@
 {% block content %}
 <div class="card mb-3" style="max-width: 540px;">
     <div class="row g-0">
-      <div class="col-md-4">
-        <img src="{{lanche.foto}}" class="img-fluid rounded-start" alt="...">
-      </div>
       <div class="col-md-8">
         <div class="card-body">
-          <h5 class="card-title">{{lanche.title}}</h5>
-          <p class="card-text">{{lanche.preco}}R$</p>
+          <h5 class="card-title">{{lanche.nome}}</h5>
+          <p class="card-text">{{lanche.tipo}}{{lanche.preco}}R$</p>
         </div>
       </div>
     </div>

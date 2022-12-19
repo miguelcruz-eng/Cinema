@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Cinema CinemaSauro{% endblock %}
+
+{% block content %}
+
+<div class="promo-list">
+    <h1>Lista de Ofertas</h1>
+    {% for promo in promos %}
+    <ul class="film-list">
+        <li class="film-item" style="list-style: none;">
+            <p>{{promo.id}} - {{promo.titulo}} | {{promo.descricao}} | {{promo.valor}} | promoção valida de {{promo.data_inicio}} até {{promo.data_fim}}</p>
+        </li>
+    </ul>
+    
+    {% endfor %}
+</div>    
+{% endblock %}

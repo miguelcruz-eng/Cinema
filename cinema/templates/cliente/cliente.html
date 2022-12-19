@@ -6,7 +6,6 @@
 {% block content %}
 <div class="offset-1 col-10 list-div">
     <h1>Cadastre o cliente</h1>
-    A secao é {{id}}
     <form method="Post">
         {% csrf_token %} 
         {{ form|crispy }}

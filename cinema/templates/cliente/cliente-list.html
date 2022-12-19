@@ -4,14 +4,14 @@
 
 {% block content %}
 <div class="secoes-cartaz">
-    <h1>Horario das Seções</h1>
-    {% for secao in secoes %}
+    <h1>Clientes Cadastrados</h1>
+    {% for cliente in clientes %}
     <ul class="secao-list">
         <li class="secao-item" style="list-style: none;">
-            <p>{{secao.hora_inicio}} &nbsp; Seção {{secao.id}} &nbsp; {{secao.sala_id_secoes}}</p>
+            <p>{{cliente.id_cliente}} &nbsp; {{cliente.nome}}</p>
         </li>
     </ul> 
     {% endfor %}
-    <span><a href="\ingresso/">Ir para ingressos</a></span>
+    <span><a href="\cliente/">Cadastrar Cliente</a></span>
 </div>    
 {% endblock %}

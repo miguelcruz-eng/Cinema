@@ -21,19 +21,16 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link" href=" ">Filmes</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#">Pré-Estreias</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="lanches/">Bomboniére</a>
+                    <a class="nav-link" href="\lanches/">Bomboniére</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Carrinho</a>
+                        <a class="nav-link" href="\promocoes/">Promoções</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="cliente/">Cliente</a>
+                        <a class="nav-link" href="\clientes/">Cliente</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Sobre nós</a>
@@ -48,7 +45,7 @@
             <div class="col-5 search-div">
                 <form method="GET" id="search-form">
                     <input class="form-control" type="text" id="search" name="search" placeholder="Digite o Filme que deseja pesquisar" value="{{ request.GET.search }}">
-                    <i class="fas fa-search" id="search_btn" style="cursor: pointer; position: relative;"></i>
+                    <i class="fas fa-search" id="search_btn" style="cursor: pointer; position: absolute; top: 12px; right: 26px;"></i>
                 </form>
             </div>
             <div class="col-5 dados-div">
