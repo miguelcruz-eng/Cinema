@@ -9,9 +9,10 @@
     <ul class="secao-list">
         <li class="secao-item" style="list-style: none;">
             <p>{{secao.hora_inicio}} &nbsp; Seção {{secao.id}} &nbsp; {{secao.sala_id_secoes}}</p>
+            <span><a href="\ingresso/{{secao.id}}">Ir para ingressos</a></span>
         </li>
     </ul> 
     {% endfor %}
-    <span><a href="\ingresso/">Ir para ingressos</a></span>
+    
 </div>    
 {% endblock %}

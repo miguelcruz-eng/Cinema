@@ -10,6 +10,7 @@ from .models import Filme
 from .models import Clientes
 from .models import Produtos
 from .models import Ingressos
+from .models import Tipoingresso
 from .models import OfertasCinema
 from .forms import ClientForm
 from .forms import IngressoForm
@@ -66,22 +67,27 @@ def ingressoView(request, id):
     ingresso = get_object_or_404(Ingressos, pk=id)
     return render(request, 'user/ingresso.html', {'ingresso',ingresso})
 
-def novoIngresso(request):
+def novoIngresso(request, id):
     if request.method == 'POST':
         form = IngressoForm(request.POST)
+        sec = Secoes.objects.get(id = id)
+        tip1 = Tipoingresso.objects.get(id_tipoingresso = 1)
+        tip2 = Tipoingresso.objects.get(id_tipoingresso = 2)
+        tip3 = Tipoingresso.objects.get(id_tipoingresso = 3)
+        tip4 = Tipoingresso.objects.get(id_tipoingresso = 4)
 
         if form.is_valid():
             ingresso = form.save(commit=False)
-            if ingresso.tipo_tingresso == 'Criança':
+            if ingresso.tipo_tingresso == tip1:
                 ingresso.preco_ingresso = 15
-            if ingresso.tipo_tingresso == 'Adulto':
+            if ingresso.tipo_tingresso == tip2:
                 ingresso.preco_ingresso = 30
-            if ingresso.tipo_tingresso == 'Idoso':
+            if ingresso.tipo_tingresso == tip3:
                 ingresso.preco_ingresso = 15
-            if ingresso.tipo_tingresso == 'Flamenguista':
+            if ingresso.tipo_tingresso == tip4:
                 ingresso.preco_ingresso = 0
-            else:
-                ingresso.preco_ingresso = 30
+            
+            ingresso.sessao_id_ingresso = sec
             ingresso.save()
             return redirect('/')
 
@@ -138,4 +144,28 @@ def novoIpedido(request):
 
     else:
         form = IpedidosForm()
-    return render(request, 'cliente/cliente.html',{'form':form})
+    return render(request, 'cliente/ipedido.html',{'form':form})
+
+from .models import Compras
+from .forms import PromoForm
+
+def promoView(request, id):
+    pcompra = get_object_or_404(Compras, pk=id)
+    return render(request, 'user/cliente.html', {'pcompra',pcompra})
+
+def novaPromo(request, id):
+    if request.method == 'POST':
+        form = PromoForm(request.POST)
+
+        if form.is_valid():
+            pcompra = form.save(commit=False)
+            pcompra.ingresso = 0
+            pcompra.lanche = 0
+            pcompra.valor_total = id
+            pcompra.data_compra = timezone.now().date()
+            pcompra.save()
+            return redirect('/')
+
+    else:
+        form = PromoForm()
+    return render(request, 'cliente/carrinho-promo.html',{'form':form})

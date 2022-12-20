@@ -5,11 +5,11 @@
 
 {% block content %}
 <div class="offset-1 col-10 list-div">
-    <h1>Cadastre o cliente!</h1>
+    <h1>Confirme quem é o cliente</h1>
     <form method="Post">
         {% csrf_token %} 
         {{ form|crispy }}
-        <input type="submit" class="btn btn-sucess" value="Cadastrar Cliente">
+        <input type="submit" class="btn btn-sucess" value="Confirmar pedido">
     </form>
 </div>    
 {% endblock %}
