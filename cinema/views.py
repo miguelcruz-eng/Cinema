@@ -100,3 +100,42 @@ def lunchView(request, id):
 def promoList(request):
     promos = OfertasCinema.objects.all()
     return render(request, 'cliente/promocoes.html', {'promos': promos})
+
+from .models import Pedidos
+from .models import ItensPedido
+from .forms import PedidoForm
+from .forms import IpedidosForm
+
+def clientView(request, id):
+    pedido = get_object_or_404(Pedidos, pk=id)
+    return render(request, 'user/cliente.html', {'pedido',pedido})
+
+def novoPedido(request):
+    if request.method == 'POST':
+        form = PedidoForm(request.POST)
+
+        if form.is_valid():
+            pedido = form.save(commit=False)
+            pedido.save()
+            return redirect('/Ipedido/')
+
+    else:
+        form = PedidoForm()
+    return render(request, 'cliente/pedido.html',{'form':form})
+
+def ipedidoView(request, id):
+    ipedido = get_object_or_404(ItensPedido, pk=id)
+    return render(request, 'user/cliente.html', {'ipedido',ipedido})
+
+def novoIpedido(request):
+    if request.method == 'POST':
+        form = IpedidosForm(request.POST)
+
+        if form.is_valid():
+            ipedido = form.save(commit=False)
+            ipedido.save()
+            return redirect('/')
+
+    else:
+        form = IpedidosForm()
+    return render(request, 'cliente/cliente.html',{'form':form})

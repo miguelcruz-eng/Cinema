@@ -131,6 +131,9 @@ class Produtos(models.Model):
         managed = False
         db_table = 'produtos'
 
+    def __str__(self):
+        return self.nome
+
 
 class Salas(models.Model):
     id = models.IntegerField(primary_key=True)
