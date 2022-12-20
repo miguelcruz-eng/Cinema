@@ -63,6 +63,13 @@ def novoCliente(request):
         form = ClientForm()
     return render(request, 'cliente/cliente.html',{'form':form})
 
+def deleteCliente(request, id):
+    Ingressos.objects.filter(cliente_id_ingresso=id).delete()
+    obj = Clientes.objects.get(pk=id)
+    obj.delete()
+    return render(request, 'cliente/deleteC.html',{'obj':obj})
+
+
 def ingressoView(request, id):
     ingresso = get_object_or_404(Ingressos, pk=id)
     return render(request, 'user/ingresso.html', {'ingresso',ingresso})
@@ -112,7 +119,7 @@ from .models import ItensPedido
 from .forms import PedidoForm
 from .forms import IpedidosForm
 
-def clientView(request, id):
+def pedidoView(request, id):
     pedido = get_object_or_404(Pedidos, pk=id)
     return render(request, 'user/cliente.html', {'pedido',pedido})
 

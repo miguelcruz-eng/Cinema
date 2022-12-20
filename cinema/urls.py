@@ -15,4 +15,5 @@ urlpatterns = [
     path('Pedido/', views.novoPedido, name='new-pedido'),
     path('Ipedido/', views.novoIpedido, name='new-ipedido'),
     path('Pcompra/<int:id>', views.novaPromo, name='new-pcompra'),
+    path('deleteCliente/<int:id>', views.deleteCliente, name='delet-cliente'),
 ]
